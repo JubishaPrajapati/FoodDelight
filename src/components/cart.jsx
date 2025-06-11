@@ -16,26 +16,30 @@ const Cart = () => {
 
     return (
         <>
-            <div className={`bg-white border fixed top-0 right-0 w-full h-full lg:w-[25vw] ${activeCart ? "translate-x-0" : "translate-x-full"} transition-all duration-500`} >
+            <div className={`bg-white border fixed top-0 right-0 w-full h-full lg:w-[25vw]  ${activeCart ? "translate-x-0" : "translate-x-full"} transition-all duration-500`} >
                 <div className="flex justify-between m-5">
                     <span className="font-bold text-xl text-gray-800">My Orders</span>
                     <CgClose onClick={() => setActiveCart(!activeCart)} className="hover:bg-red-500 hover:border-red-500 hover:text-white cursor-pointer border-2 border-gray-500 text-2xl rounded-lg text-gray-600 " />
                 </div>
 
-                {cartItems.length > 0 ? cartItems.map((food) => {
-                    return (
-                        < CartItem
-                            key={food.id}
-                            id={food.id}
-                            name={food.name}
-                            price={food.price}
-                            img={food.img}
-                            qty={food.qty}
-                        />
-                    )
-
-                }) : <h1 className="text-xl font-semibold text-center mt-10 text-gray-500">Your cart is empty</h1>}
-
+                <div className="overflow-y-auto h-[calc(100%-250px)]">
+                    {cartItems.length > 0 ? (
+                        cartItems.map((food) => (
+                            <CartItem
+                                key={food.id}
+                                id={food.id}
+                                name={food.name}
+                                price={food.price}
+                                img={food.img}
+                                qty={food.qty}
+                            />
+                        ))
+                    ) : (
+                        <h1 className="text-xl font-semibold text-center mt-10 text-gray-500">
+                            Your cart is empty
+                        </h1>
+                    )}
+                </div>
 
 
                 <div className="absolute bottom-0 ">
